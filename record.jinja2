@@ -16,6 +16,22 @@
             display: -webkit-flex; -webkit-flex-wrap: wrap;
             display: flex; flex-wrap: wrap;
         }
+        .day.day-of-week span {
+            color: #555; font-family: sans-serif; font-size: 0.8em;
+        }
+        .day.placeholder,
+        .day.day-of-week {
+            border-color: #fff;
+            display: none;
+        }
+        .weekly .placeholder,
+        .weekly .day-of-week {
+            display: inline-block;
+        }
+        .weekly .days {
+            max-height: 8em;
+            -webkit-flex-direction: column; -webkit-align-content: flex-start;
+        }
         .tooltip {
             display: none;
             position: absolute; top: 0; left: 0; right: 0;
@@ -54,8 +70,18 @@
         <input type="hidden" name="method" value="set_start"></input>
         <input type="submit">
     </form>
-    <div class="record">
+    <div class="record weekly">
         <div class="days">
+            <div class="day day-of-week"></div>
+            <div class="day day-of-week"><span>M</span></div>
+            <div class="day day-of-week"></div>
+            <div class="day day-of-week"><span>W</span></div>
+            <div class="day day-of-week"></div>
+            <div class="day day-of-week"><span>F</span></div>
+            <div class="day day-of-week"></div>
+        {%- for i in range((record.start_date.weekday() + 1) % 7) -%}
+            <div class="day placeholder"></div>
+        {%- endfor -%}
         {%- for d in record.calendar -%}
             <div class="day{% if d[0] %} set{% endif %}">
                 <div class="tooltip">{{ d[1] }}</div>
