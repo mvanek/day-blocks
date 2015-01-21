@@ -4,12 +4,14 @@
     <title>killstreak</title>
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <style>
+        header {
+            text-align: center;
+        }
         .record {
             padding-top: 2em;
             position: relative;
         }
         .days {
-            border-style: solid none none solid; border-width: 1px; border-color: #ccc;
             display: -webkit-box; -webkit-box-wrap: wrap;
             display: -moz-box; -moz-box-wrap: wrap;
             display: -ms-flexbox; -ms-flexbox-wrap: wrap;
@@ -39,9 +41,10 @@
             text-align: center;
         }
         .day {
-            border-style: none solid solid none; border-width: 1px; border-color: #ccc;
+            border-style: solid; border-width: 1px; border-color: #ccc;
             display: inline-block;
             height: 1em; width: 1em;
+            margin-left: -1px; margin-top: -1px;
         }
         .day:hover {
             background-color: #eee;
@@ -58,6 +61,7 @@
     </style>
 </head>
 <body>
+    <header><a href="/r/">home</a></header>
     <form name="set_name" method="post">
         <label for="name">name</label>
         <input type="text" name="name" value="{{ record.name }}">
