@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+<head>
+    <title>killstreak</title>
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <style>
+        .record {
+            padding-top: 2em;
+            position: relative;
+        }
+        .days {
+            border-style: solid none none solid;
+            border-width: 1px;
+            border-color: #ccc;
+            display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+            display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+            display: -ms-flexbox;      /* TWEENER - IE 10 */
+            display: -webkit-flex;     /* NEW - Chrome */
+            display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+            -webkit-flex-wrap: wrap;
+        }
+        .tooltip {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            font-size: 2em;
+            font-family: sans-serif;
+            text-align: center;
+            color: #555;
+        }
+        .day {
+            border-style: none solid solid none;
+            border-width: 1px;
+            border-color: #ccc;
+            display: inline-block;
+            height: 1em;
+            width: 1em;
+        }
+        .day:hover {
+            background-color: #eee;
+        }
+        .day.set {
+            background-color: #a0d020;
+        }
+        .day.set:hover {
+            background-color: #b0e030;
+        }
+        .day:hover .tooltip {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <form name="set_name" method="post">
+        <label for="name">name</label>
+        <input type="text" name="name" value="{{ record.name }}">
+        <input type="hidden" name="method" value="set_name"></input>
+        <input type="submit">
+    </form>
+    <form name="set_startdate" method="post">
+        <label for="date">start date</label>
+        <input type="text" name="date" value="{{ record.start_date }}">
+        <input type="hidden" name="method" value="set_start"></input>
+        <input type="submit">
+    </form>
+    <div class="record">
+        <div class="days">
+        {%- for d in record.calendar -%}
+            <div class="day{% if d[0] %} set{% endif %}">
+                <div class="tooltip">{{ d[1] }}</div>
+            </div>
+        {%- endfor -%}
+    </div>
+    </div>
+    <script>
+(function() {
+    function day_click_callback(e) {
+        toggle_node(e.target);
+    }
+
+    function unset_date(date) {
+        send_request('unset', date);
+    }
+
+    function set_date(date) {
+        send_request('set', date);
+    }
+
+    function set_start(date) {
+        send_request('set_start', date);
+    }
+
+    function set_name(name) {
+        send_request('set_name', name);
+    }
+
+    function send_request(method, date) {
+        var data, xhr;
+        data = new FormData();
+        data.append('method', method);
+        data.append('date', date);
+        xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                console.log(xhr.status);
+                console.log(xhr.responseText);
+            }
+        };
+        xhr.open('post', window.location.href);
+        xhr.send(data);
+    }
+
+    function toggle_node(dayNode) {
+        var date;
+        date = dayNode.querySelector('.tooltip').textContent;
+        if (dayNode.classList.contains('set')) {
+            unset_date(date);
+            dayNode.classList.remove('set');
+        } else {
+            set_date(date);
+            dayNode.classList.add('set');
+        }
+    }
+
+    var dayNodes, i;
+    dayNodes = document.getElementsByClassName('day');
+    for (i=0; i<dayNodes.length; i++) {
+        dayNodes[i].addEventListener('click', day_click_callback, false);
+    }
+}());
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+    <title>killstreaks</title>
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+</head>
+<body>
+    <form name="new_record" method="post">
+        <label for="name">name</label>
+        <input name="name" type="text">
+        <label for="start_date">start_date</label>
+        <input name="start_date" type="text" value="2014-01-01">
+        <input type="hidden" name="method" value="new"></input>
+        <input type="submit">
+    </form>
+    <div id="record_list">
+        <h1>All Records</h1>
+        {% for rec in records %}
+        <div class="record">
+            <a href="/r/{{ rec.key.id() }}">{{ rec.name }}</a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
