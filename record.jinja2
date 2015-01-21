@@ -80,22 +80,6 @@
         toggle_node(e.target);
     }
 
-    function unset_date(date) {
-        send_request('unset', date);
-    }
-
-    function set_date(date) {
-        send_request('set', date);
-    }
-
-    function set_start(date) {
-        send_request('set_start', date);
-    }
-
-    function set_name(name) {
-        send_request('set_name', name);
-    }
-
     function send_request(method, date) {
         var data, xhr;
         data = new FormData();
@@ -112,6 +96,18 @@
         xhr.send(data);
     }
 
+    function set_date(date) {
+        send_request('set', date);
+    }
+
+    function set_name(name) {
+        send_request('set_name', name);
+    }
+
+    function set_start(date) {
+        send_request('set_start', date);
+    }
+
     function toggle_node(dayNode) {
         var date;
         date = dayNode.querySelector('.tooltip').textContent;
@@ -122,6 +118,10 @@
             set_date(date);
             dayNode.classList.add('set');
         }
+    }
+
+    function unset_date(date) {
+        send_request('unset', date);
     }
 
     var dayNodes, i;
