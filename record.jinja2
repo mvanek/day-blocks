@@ -9,34 +9,23 @@
             position: relative;
         }
         .days {
-            border-style: solid none none solid;
-            border-width: 1px;
-            border-color: #ccc;
-            display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
-            display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
-            display: -ms-flexbox;      /* TWEENER - IE 10 */
-            display: -webkit-flex;     /* NEW - Chrome */
-            display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
-            -webkit-flex-wrap: wrap;
+            border-style: solid none none solid; border-width: 1px; border-color: #ccc;
+            display: -webkit-box; -webkit-box-wrap: wrap;
+            display: -moz-box; -moz-box-wrap: wrap;
+            display: -ms-flexbox; -ms-flexbox-wrap: wrap;
+            display: -webkit-flex; -webkit-flex-wrap: wrap;
+            display: flex; flex-wrap: wrap;
         }
         .tooltip {
             display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            font-size: 2em;
-            font-family: sans-serif;
+            position: absolute; top: 0; left: 0; right: 0;
+            color: #555; font-family: sans-serif; font-size: 2em;
             text-align: center;
-            color: #555;
         }
         .day {
-            border-style: none solid solid none;
-            border-width: 1px;
-            border-color: #ccc;
+            border-style: none solid solid none; border-width: 1px; border-color: #ccc;
             display: inline-block;
-            height: 1em;
-            width: 1em;
+            height: 1em; width: 1em;
         }
         .day:hover {
             background-color: #eee;
