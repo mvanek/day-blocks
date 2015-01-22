@@ -83,14 +83,14 @@
             <div class="day day-of-week"></div>
             <div class="day day-of-week"><span>F</span></div>
             <div class="day day-of-week"></div>
-        {%- for i in range((record.start_date.weekday() + 1) % 7) -%}
+            {%- for i in range((record.start_date.weekday() + 1) % 7) -%}
             <div class="day placeholder"></div>
-        {%- endfor -%}
-        {%- for d in record.calendar -%}
+            {%- endfor -%}
+            {%- for d in record.calendar -%}
             <div class="day{% if d[0] %} set{% endif %}">
                 <div class="tooltip">{{ d[1] }}</div>
             </div>
-        {%- endfor -%}
+            {%- endfor -%}
     </div>
     </div>
     <script>
