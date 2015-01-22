@@ -11,41 +11,6 @@
             padding-top: 2em;
             position: relative;
         }
-        .days {
-            display: -webkit-box; -webkit-box-wrap: wrap;
-            display: -moz-box; -moz-box-wrap: wrap;
-            display: -ms-flexbox; -ms-flexbox-wrap: wrap;
-            display: -webkit-flex; -webkit-flex-wrap: wrap;
-            display: flex; flex-wrap: wrap;
-        }
-        .day.day-of-week span {
-            color: #555; font-family: sans-serif; font-size: 0.8em;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            cursor: default;
-        }
-        .day.placeholder,
-        .day.day-of-week {
-            text-align: center;
-            border-color: rgba(0,0,0,0);
-            display: none;
-        }
-        .day.placeholder:hover,
-        .day.day-of-week:hover {
-            background-color: inherit;
-        }
-        .weekly .placeholder,
-        .weekly .day-of-week {
-            display: inline-block;
-        }
-        .weekly .days {
-            max-height: 8em;
-            -webkit-flex-direction: column; -webkit-align-content: flex-start;
-        }
         .tooltip {
             display: none;
             position: absolute; top: 0; left: 0; right: 0;
@@ -59,12 +24,25 @@
             user-select: none;
             cursor: default;
         }
-        .day {
+
+        /* Flexbox settings */
+        .days {
+            display: -webkit-box; -webkit-box-wrap: wrap;
+            display: -moz-box; -moz-box-wrap: wrap;
+            display: -ms-flexbox; -ms-flexbox-wrap: wrap;
+            display: -webkit-flex; -webkit-flex-wrap: wrap;
+            display: flex; flex-wrap: wrap;
+        }
+        .day,
+        .day-name,
+        .placeholder {
             border-style: solid; border-width: 1px; border-color: #ccc;
             display: inline-block;
             height: 1em; width: 1em;
             margin-left: -1px; margin-top: -1px;
         }
+
+        /* Clickable date blocks */
         .day:hover {
             background-color: #eee;
         }
@@ -76,6 +54,37 @@
         }
         .day:hover .tooltip {
             display: block;
+        }
+
+        /* Day of week & placeholder blocks, used in weekly view */
+        .day-name,
+        .placeholder {
+            text-align: center;
+            border-color: rgba(0,0,0,0);
+            display: none;  /* Hide blocks unless using weekly view */
+        }
+        .day-name span {
+            color: #555; font-family: sans-serif; font-size: 0.8em;
+        }
+        .weekly .days {
+            max-height: 8em;
+            -webkit-flex-direction: column; -webkit-align-content: flex-start;
+        }
+        .weekly .placeholder,
+        .weekly .day-name {
+            display: inline-block;
+        }
+
+        /* Un-highlightable text */
+        .day-name span,
+        .tooltip {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            cursor: default;
         }
     </style>
 </head>
@@ -95,15 +104,15 @@
     </form>
     <div class="record weekly">
         <div class="days">
-            <div class="day day-of-week"></div>
-            <div class="day day-of-week"><span>M</span></div>
-            <div class="day day-of-week"></div>
-            <div class="day day-of-week"><span>W</span></div>
-            <div class="day day-of-week"></div>
-            <div class="day day-of-week"><span>F</span></div>
-            <div class="day day-of-week"></div>
+            <div class="day-name"></div>
+            <div class="day-name"><span>M</span></div>
+            <div class="day-name"></div>
+            <div class="day-name"><span>W</span></div>
+            <div class="day-name"></div>
+            <div class="day-name"><span>F</span></div>
+            <div class="day-name"></div>
             {%- for i in range((record.start_date.weekday() + 1) % 7) -%}
-            <div class="day placeholder"></div>
+            <div class="placeholder"></div>
             {%- endfor -%}
             {%- for d in record.calendar -%}
             <div class="day{% if d[0] %} set{% endif %}">
