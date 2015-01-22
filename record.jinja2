@@ -20,11 +20,23 @@
         }
         .day.day-of-week span {
             color: #555; font-family: sans-serif; font-size: 0.8em;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            cursor: default;
         }
         .day.placeholder,
         .day.day-of-week {
-            border-color: #fff;
+            text-align: center;
+            border-color: rgba(0,0,0,0);
             display: none;
+        }
+        .day.placeholder:hover,
+        .day.day-of-week:hover {
+            background-color: inherit;
         }
         .weekly .placeholder,
         .weekly .day-of-week {
@@ -39,6 +51,13 @@
             position: absolute; top: 0; left: 0; right: 0;
             color: #555; font-family: sans-serif; font-size: 2em;
             text-align: center;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            cursor: default;
         }
         .day {
             border-style: solid; border-width: 1px; border-color: #ccc;
