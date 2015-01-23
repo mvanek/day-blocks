@@ -1,0 +1,82 @@
+header {
+    text-align: center;
+}
+.record {
+    padding-top: 2em;
+    position: relative;
+}
+.tooltip {
+    display: none;
+    position: absolute; top: 0; left: 0; right: 0;
+    color: #555; font-family: sans-serif; font-size: 2em;
+    text-align: center;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+/* Flexbox settings */
+.days {
+    display: -webkit-box; -webkit-box-wrap: wrap;
+    display: -moz-box; -moz-box-wrap: wrap;
+    display: -ms-flexbox; -ms-flexbox-wrap: wrap;
+    display: -webkit-flex; -webkit-flex-wrap: wrap;
+    display: flex; flex-wrap: wrap;
+}
+.day,
+.day-name,
+.placeholder {
+    border-style: solid; border-width: 1px; border-color: #ccc;
+    display: inline-block;
+    height: 1em; width: 1em;
+    margin-left: -1px; margin-top: -1px;
+}
+
+/* Clickable date blocks */
+.day:hover {
+    background-color: #eee;
+}
+.day.set {
+    background-color: #a0d020;
+}
+.day.set:hover {
+    background-color: #b0e030;
+}
+.day:hover .tooltip {
+    display: block;
+}
+
+/* Day of week & placeholder blocks, used in weekly view */
+.day-name,
+.placeholder {
+    text-align: center;
+    border-color: rgba(0,0,0,0);
+    display: none;  /* Hide blocks unless using weekly view */
+}
+.day-name span {
+    color: #555; font-family: sans-serif; font-size: 0.8em;
+}
+.weekly .days {
+    max-height: 8em;
+    -webkit-flex-direction: column; -webkit-align-content: flex-start;
+}
+.weekly .placeholder,
+.weekly .day-name {
+    display: inline-block;
+}
+
+/* Un-highlightable text */
+.day-name span,
+.tooltip {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+}
