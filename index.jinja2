@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>killstreaks</title>
+    <title>records</title>
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
 </head>
 <body>
@@ -13,13 +13,13 @@
         <input type="hidden" name="method" value="new"></input>
         <input type="submit">
     </form>
-    <div id="record_list">
-        <h1>All Records</h1>
+    <ul id="record_list">
+        <header>All Records</header>
         {% for rec in records %}
-        <div class="record">
+        <li class="record">
             <a href="/r/{{ rec.key.id() }}">{{ rec.name|e }}</a>
-        </div>
+        </li>
         {% endfor %}
-    </div>
+    </ul>
 </body>
 </html>
