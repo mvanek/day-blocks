@@ -17,7 +17,7 @@
         <h1>All Records</h1>
         {% for rec in records %}
         <div class="record">
-            <a href="/r/{{ rec.key.id() }}">{{ rec.name }}</a>
+            <a href="/r/{{ rec.key.id() }}">{{ rec.name|e }}</a>
         </div>
         {% endfor %}
     </div>

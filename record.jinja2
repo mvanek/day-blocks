@@ -92,7 +92,7 @@
     <header><a href="/r/">home</a></header>
     <form name="set_name" method="post">
         <label for="name">name</label>
-        <input type="text" name="name" value="{{ record.name }}">
+        <input type="text" name="name" value="{{ record.name|e }}">
         <input type="hidden" name="method" value="set_name"></input>
         <input type="submit">
     </form>
@@ -111,12 +111,12 @@
             <div class="day-name"></div>
             <div class="day-name"><span>F</span></div>
             <div class="day-name"></div>
-            {%- for i in range((record.start_date.weekday() + 1) % 7) -%}
+            {%- for i in range((record.start_date.isoweekday()) % 7) -%}
             <div class="placeholder"></div>
             {%- endfor -%}
             {%- for d in record.calendar -%}
             <div class="day{% if d[0] %} set{% endif %}">
-                <div class="tooltip">{{ d[1] }}</div>
+                <div class="tooltip">{{ d[1]|e }}</div>
             </div>
             {%- endfor -%}
     </div>
