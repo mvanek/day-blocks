@@ -17,12 +17,12 @@
         <input type="submit">
     </form>
     <ul id="record_list">
-        <header>All Records</header>
-        {% for rec in records %}
+        <h1>All Records</h1>
+        {%- for rec in records %}
         <li class="record">
             <a href="/r/{{ rec.key.id() }}">{{ rec.name|e }}</a>
         </li>
-        {% endfor %}
+        {%- endfor %}
     </ul>
     <footer><a href="https://github.com/mvanek/day-blocks">source on github</a></footer>
 </body>
