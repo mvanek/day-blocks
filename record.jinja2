@@ -27,13 +27,15 @@
             <input type="radio" name="layout" value="weekly" checked>
             <label>Github-like</label>
         </form>
-        <div class="streaks">
+        {% set latest_streak = record.latest_streak %}
+        {% if latest_streak %}
+        <div class="streak-info">
             <h1>Streaks</h1>
-            {% set longest_streak = record.longest_streak %}
-            {% set latest_streak = record.latest_streak %}
-            <div class="longest">Longest: {{ longest_streak[0] }} on {{ record.longest_streak[1] }}</div>
-            <div class="latest">Latest: {{ latest_streak[0] }} on {{ record.latest_streak[1] }}</div>
+                {% set longest_streak = record.longest_streak %}
+                <div class="longest">Longest: {{ longest_streak.length }} on {{ longest_streak.start_date }}</div>
+                <div class="latest">Latest: {{ latest_streak.length }} on {{ latest_streak.start_date }}</div>
         </div>
+        {% endif %}
         <ul class="days">
             <li class="day-name"></li>
             <li class="day-name"><span>M</span></li>

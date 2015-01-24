@@ -58,7 +58,7 @@ class Record(ndb.Model):
     @property
     def longest_streak(self):
         try:
-            return max(self.streaks)
+            return max(self.streaks, key=lambda s: s.length)
         except ValueError:
             return None
 
@@ -77,7 +77,7 @@ class Record(ndb.Model):
                 streak_start = self.start_date + datetime.timedelta(d)
             prev = d
         else:
-            yield Streak(streak_len, streak_start)
+            yield Streak(streak_len + 1, streak_start)
 
     def set_start(self, date):
         diff = (date - self.start_date).days
