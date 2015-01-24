@@ -20,30 +20,34 @@
         <input type="submit">
     </form>
     <div class="record weekly">
-        <form name="view" action="javascript:void()">
+        <form name="view" action="javascript:void();">
             <h1>Layout</h1>
             <input type="radio" name="layout" value="plain">
             <label>Plain</label>
             <input type="radio" name="layout" value="weekly" checked>
             <label>Github-like</label>
         </form>
-        <div class="days">
-            <div class="day-name"></div>
-            <div class="day-name"><span>M</span></div>
-            <div class="day-name"></div>
-            <div class="day-name"><span>W</span></div>
-            <div class="day-name"></div>
-            <div class="day-name"><span>F</span></div>
-            <div class="day-name"></div>
+        <div class="streaks">
+            <div class="longest-streak">Longest streak: {{ record.longest_streak }}</div>
+            <div class="latest-streak">Last streak: {{ record.current_streak }}</div>
+        </div>
+        <ul class="days">
+            <li class="day-name"></li>
+            <li class="day-name"><span>M</span></li>
+            <li class="day-name"></li>
+            <li class="day-name"><span>W</span></li>
+            <li class="day-name"></li>
+            <li class="day-name"><span>F</span></li>
+            <li class="day-name"></li>
             {%- for i in range((record.start_date.isoweekday()) % 7) -%}
-            <div class="placeholder"></div>
+            <li class="placeholder"></li>
             {%- endfor -%}
             {%- for d in record.calendar -%}
-            <div class="day{% if d[0] %} set{% endif %}">
+            <li class="day{% if d[0] %} set{% endif %}">
                 <div class="tooltip">{{ d[1]|e }}</div>
-            </div>
+            </li>
             {%- endfor -%}
-    </div>
+        </ul>
     </div>
     <script src="/js/record.js"></script>
 </body>

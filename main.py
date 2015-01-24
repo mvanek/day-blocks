@@ -44,6 +44,35 @@ class Record(ndb.Model):
         for i in range(prev_set + 1, today + 1):
             yield (False, self.start_date + datetime.timedelta(i))
 
+    @property
+    def current_streak(self):
+        current = 0
+        for s in self.streaks:
+            current = s
+        return current
+
+    @property
+    def longest_streak(self):
+        try:
+            return max(self.streaks)
+        except ValueError:
+            return 0
+
+    @property
+    def streaks(self):
+        dates = iter(self.dates)
+        prev = next(dates)
+        streak_start = self.start_date + datetime.timedelta(prev)
+        streak_len = 0
+        for d in dates:
+            streak_len += 1
+            if d - prev - 1:
+                # streak is over
+                yield (streak_len, streak_start)
+                streak_len = 0
+                streak_start = self.start_date + datetime.timedelta(d)
+            prev = d
+
     def set_start(self, date):
         diff = (date - self.start_date).days
         self.start_date = date
