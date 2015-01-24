@@ -16,9 +16,10 @@
 # limitations under the License.
 #
 import webapp2
+from collections import namedtuple
 from google.appengine.ext import ndb
-import jinja2
 import os
+import jinja2
 import datetime
 import logging
 
@@ -26,6 +27,9 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
+
+Streak = namedtuple('Streak', ['length', 'start_date'])
+Day = namedtuple('Day', ['set', 'start_date'])
 
 class Record(ndb.Model):
     start_date = ndb.DateProperty()
@@ -37,16 +41,16 @@ class Record(ndb.Model):
         prev_set = -1
         for next_set in self.dates:
             for i in range(prev_set + 1, next_set):
-                yield (False, self.start_date + datetime.timedelta(i))
-            yield (True, self.start_date + datetime.timedelta(next_set))
+                yield Day(False, self.start_date + datetime.timedelta(i))
+            yield Day(True, self.start_date + datetime.timedelta(next_set))
             prev_set = next_set
         today = (datetime.datetime.now().date() - self.start_date).days
         for i in range(prev_set + 1, today + 1):
-            yield (False, self.start_date + datetime.timedelta(i))
+            yield Day(False, self.start_date + datetime.timedelta(i))
 
     @property
-    def current_streak(self):
-        current = 0
+    def latest_streak(self):
+        current = None
         for s in self.streaks:
             current = s
         return current
@@ -56,7 +60,7 @@ class Record(ndb.Model):
         try:
             return max(self.streaks)
         except ValueError:
-            return 0
+            return None
 
     @property
     def streaks(self):
@@ -68,10 +72,12 @@ class Record(ndb.Model):
             streak_len += 1
             if d - prev - 1:
                 # streak is over
-                yield (streak_len, streak_start)
+                yield Streak(streak_len, streak_start)
                 streak_len = 0
                 streak_start = self.start_date + datetime.timedelta(d)
             prev = d
+        else:
+            yield Streak(streak_len, streak_start)
 
     def set_start(self, date):
         diff = (date - self.start_date).days

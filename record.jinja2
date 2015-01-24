@@ -28,8 +28,11 @@
             <label>Github-like</label>
         </form>
         <div class="streaks">
-            <div class="longest-streak">Longest streak: {{ record.longest_streak }}</div>
-            <div class="latest-streak">Last streak: {{ record.current_streak }}</div>
+            <h1>Streaks</h1>
+            {% set longest_streak = record.longest_streak %}
+            {% set latest_streak = record.latest_streak %}
+            <div class="longest">Longest: {{ longest_streak[0] }} on {{ record.longest_streak[1] }}</div>
+            <div class="latest">Latest: {{ latest_streak[0] }} on {{ record.latest_streak[1] }}</div>
         </div>
         <ul class="days">
             <li class="day-name"></li>
