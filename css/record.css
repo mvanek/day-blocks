@@ -19,7 +19,7 @@ header {
     display: -webkit-box; -webkit-box-wrap: wrap;
     display: -moz-box; -moz-box-wrap: wrap;
     display: -ms-flexbox; -ms-flexbox-wrap: wrap;
-    display: -webkit-flex; -webkit-flex-wrap: wrap;
+    display: -webkit-flex; -webkit-flex-wrap: wrap; -webkit-justify-content: center;
     display: flex; flex-wrap: wrap;
 }
 .day,
