@@ -1,9 +1,9 @@
 header {
     text-align: center;
 }
-.record {
-    padding-top: 2em;
+.days {
     position: relative;
+    padding-top: 2em;
 }
 .tooltip {
     display: none;
@@ -61,12 +61,48 @@ header {
 }
 .weekly .days {
     max-height: 8em;
-    -webkit-flex-direction: column; -webkit-align-content: flex-start;
+    -webkit-flex-direction: column; -webkit-align-content: center;
 }
 .weekly .placeholder,
 .weekly .day-name {
     display: inline-block;
 }
+
+/*
+ * View controls
+ */
+.record form h1 {
+    display: inline;
+    margin-right: 1em;
+}
+
+/*
+ * Streaks
+ */
+.streak-info {
+    color: #555; font-family: sans-serif;
+    text-align: center;
+    letter-spacing: 1em;
+}
+.streak {
+    display: inline-block;
+    letter-spacing: normal;
+    font-size: 0.75em;
+}
+.streak-length {
+    font-size: 1.33em;
+    margin-top: 0.25em; margin-bottom: 0.25em;
+}
+/*
+.streak-info {
+    overflow: auto;
+}
+.streak {
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+*/
 
 /*
  * Un-highlightable text

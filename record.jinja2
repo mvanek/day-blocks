@@ -1,3 +1,8 @@
+{% macro render_streak(streak, label) -%}
+    <h2>{{ label }}</h2>
+    <div class="streak-length">{{ streak.length }} days</div>
+    <div class="streak-date">{{ streak.start_date }}</div>
+{%- endmacro %}
 <!doctype html>
 <html>
 <head>
@@ -20,22 +25,6 @@
         <input type="submit">
     </form>
     <div class="record weekly">
-        <form name="view" action="javascript:void();">
-            <h1>Layout</h1>
-            <input type="radio" name="layout" value="plain">
-            <label>Plain</label>
-            <input type="radio" name="layout" value="weekly" checked>
-            <label>Github-like</label>
-        </form>
-        {% set latest_streak = record.latest_streak %}
-        {% if latest_streak %}
-        <div class="streak-info">
-            <h1>Streaks</h1>
-                {% set longest_streak = record.longest_streak %}
-                <div class="longest">Longest: {{ longest_streak.length }} on {{ longest_streak.start_date }}</div>
-                <div class="latest">Latest: {{ latest_streak.length }} on {{ latest_streak.start_date }}</div>
-        </div>
-        {% endif %}
         <ul class="days">
             <li class="day-name"></li>
             <li class="day-name"><span>M</span></li>
@@ -53,6 +42,25 @@
             </li>
             {%- endfor -%}
         </ul>
+        {% set latest_streak = record.latest_streak %}
+        {% if latest_streak %}
+        <div class="streak-info">
+            {% set longest_streak = record.longest_streak %}
+            <div class="streak">
+                {{ render_streak(longest_streak, 'Longest Streak') }}
+            </div>
+            <div class="streak">
+                {{ render_streak(latest_streak, 'Latest Streak') }}
+            </div>
+        </div>
+        {% endif %}
+        <form name="view" action="javascript:void();">
+            <h1>View options:</h1>
+            <input type="radio" name="layout" value="plain">
+            <label>Plain</label>
+            <input type="radio" name="layout" value="weekly" checked>
+            <label>Github-like</label>
+        </form>
     </div>
     <script src="/js/record.js"></script>
 </body>
