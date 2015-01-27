@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+    <title>records</title>
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/css/record.css">
+    <style>
+    footer { text-align:center; }
+    </style>
+</head>
+<body>
+    <header><a href="/r/">home</a> | <a href="/u/">user list</a></header>
+    <ul class="user-list">
+        {% for u in users if u %}
+        <li><a href="/u/{{ u }}">{{ u }}</a></li>
+        {% endfor %}
+    </ul>
+    <footer><a href="https://github.com/mvanek/day-blocks">source on github</a></footer>
+</body>
+</html>
