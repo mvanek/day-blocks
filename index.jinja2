@@ -28,6 +28,9 @@
         {%- for rec in records %}
         <li class="record-link">
             <a href="/r/{{ rec.key.id() }}">{{ rec.name|e }}</a>
+            {% if not user %}
+            (<a href="/u/{{ rec.user|e }}">{{ rec.user|e }}</a>)
+            {% endif %}
         </li>
         {{ render_record(rec) }}
         {%- endfor %}
