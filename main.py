@@ -30,7 +30,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     autoescape=True)
 
 Streak = namedtuple('Streak', ['length', 'start_date'])
-Day = namedtuple('Day', ['set', 'start_date'])
+Day = namedtuple('Day', ['set', 'date'])
 
 class Record(ndb.Model):
     start_date = ndb.DateProperty()
