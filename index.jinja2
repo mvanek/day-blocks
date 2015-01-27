@@ -11,6 +11,7 @@
     </style>
 </head>
 <body>
+    <header><a href="/r/">home</a> | <a href="/u/">user list</a></header>
     <form name="new_record" action="/r/" method="post">
         <h1>Create new</h1>
         <label for="name">name</label>
@@ -23,7 +24,7 @@
         <input type="submit">
     </form>
     <ul id="record_list">
-        <h1>All Records</h1>
+        <h1>{{ user|e|default('everybody', True) }}'s records</h1>
         {%- for rec in records %}
         <li class="record-link">
             <a href="/r/{{ rec.key.id() }}">{{ rec.name|e }}</a>

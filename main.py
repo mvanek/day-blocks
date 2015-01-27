@@ -17,6 +17,7 @@
 #
 import webapp2
 from collections import namedtuple
+from urllib import unquote
 from google.appengine.ext import ndb
 import os
 import jinja2
@@ -168,9 +169,16 @@ class RecordListHandler(webapp2.RequestHandler):
 class UserHandler(webapp2.RequestHandler):
     def get(self):
         template = JINJA_ENVIRONMENT.get_template('index.jinja2')
-        user = self.request.path.split('/')[2]
+        user = unquote(self.request.path.split('/')[2])
         records = Record.query(Record.user == user)
         self.response.write(template.render(records=records, user=user))
+
+class UserListHandler(webapp2.RequestHandler):
+    def get(self):
+        template = JINJA_ENVIRONMENT.get_template('users.jinja2')
+        qry = Record.query(projection=['user'], distinct=True).order(Record.user)
+        users = [r.user for r in qry]
+        self.response.write(template.render(users=users))
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
@@ -178,6 +186,7 @@ class MainHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
+    ('/u/', UserListHandler),
     ('/u/.*', UserHandler),
     ('/r/', RecordListHandler),
     ('/r/.*', RecordHandler)
