@@ -48,23 +48,26 @@
     }
 
     var dayNodes = document.getElementsByClassName('day'),
-        viewForm = document.forms.view,
-        i;
+        viewForms = document.querySelectorAll('.record form'),
+        i, j;
     /* Sync all day nodes with server */
     for (i=0; i<dayNodes.length; i++) {
         dayNodes[i].addEventListener('click', day_click_callback, false);
     }
     /* User layout controls */
-    viewForm.addEventListener('change', function(e) {
-        var curButton,
-            layoutButtons = viewForm.layout;
-        for (i=0; i<layoutButtons.length; i++) {
-            curButton = layoutButtons[i];
-            if (curButton.checked) {
-                viewForm.parentNode.classList.add(curButton.value);
-            } else {
-                viewForm.parentNode.classList.remove(curButton.value);
+    for (i=0; i<viewForms.length; i++) {
+        viewForms[i].addEventListener('change', function(e) {
+            var curButton,
+                viewForm = e.target.parentNode,
+                layoutButtons = viewForm.layout;
+            for (j=0; j<layoutButtons.length; j++) {
+                curButton = layoutButtons[j];
+                if (curButton.checked) {
+                    viewForm.parentNode.classList.add(curButton.value);
+                } else {
+                    viewForm.parentNode.classList.remove(curButton.value);
+                }
             }
-        }
-    }, false);
+        }, false);
+    }
 }());
