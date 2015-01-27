@@ -28,7 +28,7 @@ header {
 .day-name,
 .placeholder {
     border-style: solid; border-width: 1px; border-color: #ccc;
-    sizing: border-box; height: 1em; width: 1em; line-height: 1em;
+    box-sizing: border-box; height: 1em; width: 1em; line-height: 1em;
     margin-left: -1px; margin-top: -1px;
 }
 .weekly .days {
