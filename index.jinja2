@@ -8,19 +8,50 @@
     <style>
     footer { text-align:center; }
     .record { border-bottom:solid 1px #ccc; margin-bottom:1em; }
+    body {
+        font-family: sans-serif;
+    }
+    #show-form {
+        position: absolute; right: 0; top: 0;
+        margin: 0;
+        font-size: 1.25em;
+    }
+    form[name="new_record"] {
+        border: solid 1px #ccc;
+        padding: 2em 0.5em 0.5em 0.5em;
+        text-align: right;
+        position: absolute; top: 50%; left: 50%;
+        margin-right: -50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        background-color:#fff;
+        z-index: 1;
+    }
+    form[name="new_record"] h1 {
+        position: absolute; top: 0.5em; left: 0.5em;
+        font-size: 1em;
+    }
+    form[name="new_record"] label {
+        font-size: 0.9em;
+    }
+    .hidden {
+        display: none;
+    }
     </style>
 </head>
 <body>
     <header><a href="/r/">home</a> | <a href="/u/">user list</a></header>
-    <form name="new_record" action="/r/" method="post">
+    <button id="show-form">+ New</button>
+    <form class="hidden" name="new_record" action="/r/" method="post">
         <h1>Create new</h1>
         <label for="name">name</label>
-        <input name="name" type="text">
+        <input name="name" type="text"><br>
         <label for="start_date">start_date</label>
-        <input name="start_date" type="text" value="2014-01-01">
+        <input name="start_date" type="text" value="2014-01-01"><br>
         <label for="user">user</label>
-        <input name="user" type="text" {% if user %}value="{{ user|e }}"{% endif %}>
+        <input name="user" type="text" {% if user %}value="{{ user|e }}"{% endif %}><br>
         <input type="hidden" name="method" value="new"></input>
+        <button type="button">Cancel</button>
         <input type="submit">
     </form>
     <ul id="record_list">
@@ -37,5 +68,16 @@
     </ul>
     <footer><a href="https://github.com/mvanek/day-blocks">source on github</a></footer>
     <script src="/js/record.js"></script>
+    <script>
+    var form = document.forms.new_record,
+        cancelButton = form.querySelector('button'),
+        showButton = document.getElementById('show-form');
+    showButton.addEventListener('click', function() {
+        form.classList.remove('hidden');
+    }, false);
+    cancelButton.addEventListener('click', function(e) {
+        form.classList.add('hidden');
+    }, false);
+    </script>
 </body>
 </html>
