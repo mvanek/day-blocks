@@ -21,6 +21,12 @@
         <input type="hidden" name="method" value="set_start"></input>
         <input type="submit">
     </form>
+    <form name="set_user" method="post">
+        <label for="user">user</label>
+        <input type="text" name="user" value="{{ record.user|default('', True)|e }}">
+        <input type="hidden" name="method" value="set_user"></input>
+        <input type="submit">
+    </form>
     {{ render_record(record) }}
     <script src="/js/record.js"></script>
 </body>

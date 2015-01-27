@@ -31,6 +31,10 @@
         send_request('set_start', id, date);
     }
 
+    function set_user(id, user) {
+        send_request('set_user', id, user);
+    }
+
     function toggle_node(dayNode) {
         var date = dayNode.querySelector('.tooltip').textContent,
             id = dayNode.parentNode.parentNode.id.split('-')[1];

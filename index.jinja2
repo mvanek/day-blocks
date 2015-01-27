@@ -12,10 +12,13 @@
 </head>
 <body>
     <form name="new_record" method="post">
+        <h1>Create new</h1>
         <label for="name">name</label>
         <input name="name" type="text">
         <label for="start_date">start_date</label>
         <input name="start_date" type="text" value="2014-01-01">
+        <label for="user">user</label>
+        <input name="user" type="text" {% if user %}value="{{ user }}"{% endif %}>
         <input type="hidden" name="method" value="new"></input>
         <input type="submit">
     </form>

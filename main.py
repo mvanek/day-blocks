@@ -33,6 +33,7 @@ Day = namedtuple('Day', ['set', 'start_date'])
 
 class Record(ndb.Model):
     start_date = ndb.DateProperty()
+    user = ndb.StringProperty()
     dates = ndb.IntegerProperty(repeated=True)
     name = ndb.StringProperty(required=True)
 
@@ -84,9 +85,6 @@ class Record(ndb.Model):
         self.start_date = date
         self.dates = sorted(map(lambda d: d - diff, self.dates))
 
-    def set_name(self, name):
-        self.name = name
-
     def set_date(self, date):
         if self.start_date is None or self.dates is None:
             self.start_date = date
@@ -136,7 +134,9 @@ class RecordHandler(webapp2.RequestHandler):
             self.abort(404)
         method = self.request.get('method')
         if method == 'set_name':
-            record.set_name(self.request.get('name'))
+            record.name = self.request.get('name')
+        elif method == 'set_user':
+            record.user = self.request.get('user')
         else:
             date = datetime.date(*map(int, self.request.get('date').split('-')))
             if method == 'set':
@@ -158,9 +158,19 @@ class RecordListHandler(webapp2.RequestHandler):
     def post(self):
         start_date = datetime.date(*map(int, self.request.get('start_date').split('-')))
         name = self.request.get('name')
-        record = Record(name=name, start_date=start_date)
+        user = self.request.get('user')
+        if not user:
+            user = None
+        record = Record(name=name, start_date=start_date, user=user)
         logging.info(record.put())
         self.redirect('/r/')
+
+class UserHandler(webapp2.RequestHandler):
+    def get(self):
+        template = JINJA_ENVIRONMENT.get_template('index.jinja2')
+        user = self.request.path.split('/')[2]
+        records = Record.query(Record.user == user)
+        self.response.write(template.render(records=records, user=user))
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
@@ -168,6 +178,7 @@ class MainHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
+    ('/u/.*', UserHandler),
     ('/r/', RecordListHandler),
     ('/r/.*', RecordHandler)
 ], debug=True)
