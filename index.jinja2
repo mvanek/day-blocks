@@ -1,10 +1,13 @@
+{% from '_record_helpers.jinja2' import render_record %}
 <!doctype html>
 <html>
 <head>
     <title>records</title>
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/css/record.css">
     <style>
     footer { text-align:center; }
+    .record { border-bottom:solid 1px #ccc; margin-bottom:1em; }
     </style>
 </head>
 <body>
@@ -19,11 +22,13 @@
     <ul id="record_list">
         <h1>All Records</h1>
         {%- for rec in records %}
-        <li class="record">
+        <li class="record-link">
             <a href="/r/{{ rec.key.id() }}">{{ rec.name|e }}</a>
         </li>
+        {{ render_record(rec) }}
         {%- endfor %}
     </ul>
     <footer><a href="https://github.com/mvanek/day-blocks">source on github</a></footer>
+    <script src="/js/record.js"></script>
 </body>
 </html>
