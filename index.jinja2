@@ -58,8 +58,8 @@
         <h1>{{ user|e|default('everybody', True) }}'s records</h1>
         {%- for rec in records %}
         <li class="record-link">
-            <a href="/r/{{ rec.key.id() }}">{{ rec.name|e }}</a>
-            {% if not user %}
+            <a href="/r/{{ rec.key.id() }}">{{ rec.name|e|default('Untitled', True) }}</a>
+            {% if not user and rec.user %}
             (<a href="/u/{{ rec.user|e }}">{{ rec.user|e }}</a>)
             {% endif %}
         </li>
