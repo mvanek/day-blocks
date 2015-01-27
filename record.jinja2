@@ -1,30 +1,11 @@
-{% macro render_streak(streak, label) -%}
+{%- macro render_streak(streak, label) -%}
     <h2>{{ label }}</h2>
     <div class="streak-length">{{ streak.length }} days</div>
     <div class="streak-date">{{ streak.start_date }}</div>
-{%- endmacro %}
-<!doctype html>
-<html>
-<head>
-    <title>{{ record.name|e }}</title>
-    <link rel="stylesheet" type="text/css" href="/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/css/record.css">
-</head>
-<body>
-    <header><a href="/r/">home</a></header>
-    <form name="set_name" method="post">
-        <label for="name">name</label>
-        <input type="text" name="name" value="{{ record.name|e }}">
-        <input type="hidden" name="method" value="set_name"></input>
-        <input type="submit">
-    </form>
-    <form name="set_startdate" method="post">
-        <label for="date">start date</label>
-        <input type="text" name="date" value="{{ record.start_date }}">
-        <input type="hidden" name="method" value="set_start"></input>
-        <input type="submit">
-    </form>
-    <div class="record weekly">
+{%- endmacro -%}
+
+{%- macro render_record(record) -%}
+    <div id="record-{{ record.key.id() }}" class="record weekly">
         <ul class="days">
             <li class="day-name"></li>
             <li class="day-name"><div>M</div></li>
@@ -62,6 +43,30 @@
             <label>Github-like</label>
         </form>
     </div>
+{%- endmacro -%}
+
+<!doctype html>
+<html>
+<head>
+    <title>{{ record.name|e }}</title>
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/css/record.css">
+</head>
+<body>
+    <header><a href="/r/">home</a></header>
+    <form name="set_name" method="post">
+        <label for="name">name</label>
+        <input type="text" name="name" value="{{ record.name|e }}">
+        <input type="hidden" name="method" value="set_name"></input>
+        <input type="submit">
+    </form>
+    <form name="set_startdate" method="post">
+        <label for="date">start date</label>
+        <input type="text" name="date" value="{{ record.start_date }}">
+        <input type="hidden" name="method" value="set_start"></input>
+        <input type="submit">
+    </form>
+    {{ render_record(record) }}
     <script src="/js/record.js"></script>
 </body>
 </html>

@@ -4,48 +4,47 @@
         toggle_node(e.target);
     }
 
-    function send_request(method, date) {
-        var data, xhr;
-        data = new FormData();
+    function send_request(method, id, date) {
+        var data = new FormData(),
+            xhr = new XMLHttpRequest();
         data.append('method', method);
         data.append('date', date);
-        xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
                 console.log(xhr.status);
                 console.log(xhr.responseText);
             }
         };
-        xhr.open('post', window.location.href);
+        xhr.open('post', '/r/'+id);
         xhr.send(data);
     }
 
-    function set_date(date) {
-        send_request('set', date);
+    function set_date(id, date) {
+        send_request('set', id, date);
     }
 
-    function set_name(name) {
-        send_request('set_name', name);
+    function set_name(id, name) {
+        send_request('set_name', id, name);
     }
 
-    function set_start(date) {
-        send_request('set_start', date);
+    function set_start(id, date) {
+        send_request('set_start', id, date);
     }
 
     function toggle_node(dayNode) {
-        var date;
-        date = dayNode.querySelector('.tooltip').textContent;
+        var date = dayNode.querySelector('.tooltip').textContent,
+            id = dayNode.parentNode.parentNode.id.split('-')[1];
         if (dayNode.classList.contains('set')) {
-            unset_date(date);
+            unset_date(id, date);
             dayNode.classList.remove('set');
         } else {
-            set_date(date);
+            set_date(id, date);
             dayNode.classList.add('set');
         }
     }
 
-    function unset_date(date) {
-        send_request('unset', date);
+    function unset_date(id, date) {
+        send_request('unset', id, date);
     }
 
     var dayNodes = document.getElementsByClassName('day'),
