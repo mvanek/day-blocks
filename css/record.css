@@ -4,12 +4,14 @@ header {
 .days {
     position: relative;
     padding-top: 2em;
+    font-size: 1.1em;
 }
 .tooltip {
     display: none;
     position: absolute; top: 0; left: 0; right: 0;
     color: #555; font-family: sans-serif; font-size: 2em;
     text-align: center;
+    line-height: 1em;
 }
 
 /*
@@ -19,16 +21,21 @@ header {
     display: -webkit-box; -webkit-box-wrap: wrap;
     display: -moz-box; -moz-box-wrap: wrap;
     display: -ms-flexbox; -ms-flexbox-wrap: wrap;
-    display: -webkit-flex; -webkit-flex-wrap: wrap; -webkit-justify-content: center;
+    display: -webkit-flex; -webkit-flex-wrap: wrap;
     display: flex; flex-wrap: wrap;
 }
 .day,
 .day-name,
 .placeholder {
     border-style: solid; border-width: 1px; border-color: #ccc;
-    display: inline-block;
-    height: 1em; width: 1em;
+    box-sizing: border-box; height: 1em; width: 1em; line-height: 1em;
     margin-left: -1px; margin-top: -1px;
+}
+.weekly .days {
+    height: 7em;
+    margin-bottom: -7px;
+    -webkit-flex-direction: column;
+    -webkit-align-content: center;
 }
 
 /*
@@ -56,16 +63,12 @@ header {
     border-color: rgba(0,0,0,0);
     display: none;  /* Hide blocks unless using weekly view */
 }
-.day-name span {
+.day-name div {
     color: #555; font-family: sans-serif; font-size: 0.8em;
-}
-.weekly .days {
-    max-height: 8em;
-    -webkit-flex-direction: column; -webkit-align-content: center;
 }
 .weekly .placeholder,
 .weekly .day-name {
-    display: inline-block;
+    display: normal;
 }
 
 /*
@@ -83,31 +86,22 @@ header {
     color: #555; font-family: sans-serif;
     text-align: center;
     letter-spacing: 1em;
+    margin-top: 0.5em;
 }
 .streak {
     display: inline-block;
-    letter-spacing: normal;
     font-size: 0.75em;
+    letter-spacing: normal;
 }
 .streak-length {
     font-size: 1.33em;
     margin-top: 0.25em; margin-bottom: 0.25em;
 }
-/*
-.streak-info {
-    overflow: auto;
-}
-.streak {
-    float: left;
-    width: 50%;
-    text-align: center;
-}
-*/
 
 /*
  * Un-highlightable text
  */
-.day-name span,
+.day-name div,
 .tooltip {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
