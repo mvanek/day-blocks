@@ -42,6 +42,8 @@ class Record(ndb.Model):
     def calendar(self):
         prev_set = -1
         for next_set in self.dates:
+            if next_set < 0:
+                continue
             for i in range(prev_set + 1, next_set):
                 yield Day(False, self.start_date + datetime.timedelta(i))
             yield Day(True, self.start_date + datetime.timedelta(next_set))
