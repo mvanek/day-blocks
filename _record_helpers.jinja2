@@ -18,8 +18,8 @@
             <li class="placeholder"></li>
             {%- endfor -%}
             {%- for d in record.calendar -%}
-            <li class="day{% if d[0] %} set{% endif %}">
-                <div class="tooltip">{{ d[1]|e }}</div>
+            <li class="day{% if d.set %} set{% endif %}">
+                <div class="tooltip">{{ d.date|e }}</div>
             </li>
             {%- endfor -%}
         </ul>
