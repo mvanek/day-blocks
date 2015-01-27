@@ -28,14 +28,13 @@ header {
 .day-name,
 .placeholder {
     border-style: solid; border-width: 1px; border-color: #ccc;
-    box-sizing: border-box; height: 1em; width: 1em; line-height: 1em;
+    sizing: border-box; height: 1em; width: 1em; line-height: 1em;
     margin-left: -1px; margin-top: -1px;
 }
 .weekly .days {
     height: 7em;
     margin-bottom: -7px;
-    -webkit-flex-direction: column;
-    -webkit-align-content: center;
+    -webkit-flex-direction: column; -webkit-align-content: center;
 }
 
 /*
@@ -68,7 +67,7 @@ header {
 }
 .weekly .placeholder,
 .weekly .day-name {
-    display: normal;
+    display: block;
 }
 
 /*
