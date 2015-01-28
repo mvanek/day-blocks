@@ -34,7 +34,11 @@ header {
 .weekly .days {
     height: 7em;
     margin-bottom: -7px;
+    -webkit-box-direction: column; -webkit-align-content: center;
+    -moz-box-direction: column; -moz-align-content: center;
+    -ms-flexbox-direction: column; -ms-align-content: center;
     -webkit-flex-direction: column; -webkit-align-content: center;
+    flex-direction: column; align-content: center;
 }
 
 /*
