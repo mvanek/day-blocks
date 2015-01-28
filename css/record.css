@@ -1,5 +1,5 @@
 .days {
-    margin-left: 1em;
+    margin: 0 1em;
     padding-bottom: 2em;
     font-size: 1.1em;
     position: relative;
@@ -96,6 +96,12 @@
 .streak-length {
     font-size: 1.33em;
     margin-top: 0.25em; margin-bottom: 0.25em;
+}
+/* Clearfix streak-info containers */
+.record:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 /*
