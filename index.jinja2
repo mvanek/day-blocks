@@ -2,42 +2,12 @@
 <!doctype html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>records</title>
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/css/record_list.css">
     <link rel="stylesheet" type="text/css" href="/css/record.css">
-    <style>
-    footer { text-align:center; }
-    .record { border-bottom:solid 1px #ccc; margin-bottom:1em; }
-    body {
-        font-family: sans-serif;
-    }
-    #show-form {
-        position: absolute; right: 0; top: 0;
-        margin: 0;
-        font-size: 1.25em;
-    }
-    form[name="new_record"] {
-        border: solid 1px #ccc;
-        padding: 2em 0.5em 0.5em 0.5em;
-        text-align: right;
-        position: absolute; top: 50%; left: 50%;
-        margin-right: -50%;
-        -webkit-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-        background-color:#fff;
-        z-index: 1;
-    }
-    form[name="new_record"] h1 {
-        position: absolute; top: 0.5em; left: 0.5em;
-        font-size: 1em;
-    }
-    form[name="new_record"] label {
-        font-size: 0.9em;
-    }
-    .hidden {
-        display: none;
-    }
-    </style>
 </head>
 <body>
     <header><a href="/r/">home</a> | <a href="/u/">user list</a></header>
@@ -57,18 +27,15 @@
     <ul id="record_list">
         <h1>{{ user|e|default('everybody', True) }}'s records</h1>
         {%- for rec in records %}
-        <li class="record-link">
-            <a href="/r/{{ rec.key.id() }}">{{ rec.name|e|default('Untitled', True) }}</a>
-            {% if not user and rec.user %}
-            (<a href="/u/{{ rec.user|e }}">{{ rec.user|e }}</a>)
-            {% endif %}
+        <li>
+            {{ render_record(rec, show_link=True, show_user=(not user)) }}
         </li>
-        {{ render_record(rec) }}
         {%- endfor %}
     </ul>
     <footer><a href="https://github.com/mvanek/day-blocks">source on github</a></footer>
     <script src="/js/record.js"></script>
     <script>
+(function() {
     var form = document.forms.new_record,
         cancelButton = form.querySelector('button'),
         showButton = document.getElementById('show-form');
@@ -78,6 +45,7 @@
     cancelButton.addEventListener('click', function(e) {
         form.classList.add('hidden');
     }, false);
+}());
     </script>
 </body>
 </html>

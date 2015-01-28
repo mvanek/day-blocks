@@ -1,0 +1,25 @@
+/* Form settings */
+#show-form {
+    position: absolute; right: 0; top: 0;
+    margin: 0;
+    font-size: 1.25em; }
+form[name="new_record"] {
+    border: solid 1px #ccc;
+    padding: 2em 0.5em 0.5em 0.5em;
+    text-align: right;
+    position: absolute; top: 50%; left: 50%;
+    margin-right: -50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background-color:#fff;
+    z-index: 1; }
+form[name="new_record"] h1 { position: absolute; top: 0.5em; left: 0.5em; font-size: 1em; }
+form[name="new_record"] label { font-size: 0.9em; }
+.hidden { display: none; }
+
+/* List settings */
+#record_list>h1 { text-align: center; font-size: 1.25em; }
+
+/* List item settings */
+#record_list>li { padding:1em 0; }
+#record_list>li+li { border-top:solid 1px #ccc; }

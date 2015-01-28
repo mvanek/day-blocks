@@ -4,8 +4,37 @@
     <div class="streak-date">{{ streak.start_date }}</div>
 {%- endmacro -%}
 
-{%- macro render_record(record) -%}
-    <div id="record-{{ record.key.id() }}" class="record weekly">
+{%- macro render_record(record, show_link=False, show_user=True) -%}
+    <div id="record-{{ record.key.id() }}" class="record">
+        <header>
+            {% if show_link %}
+            <div class="record-link">
+                <a href="/r/{{ record.key.id() }}">{{ record.name|e|default('Untitled', True) }}</a>
+                {% if show_user and record.user %}
+                (<a href="/u/{{ record.user|e }}">{{ record.user|e }}</a>)
+                {% endif %}
+            </div>
+            {% endif %}
+            <form action="javascript:void();">
+                <h1>View options:</h1>
+                <input type="radio" name="layout" value="plain" checked>
+                <label>Plain</label>
+                <input type="radio" name="layout" value="weekly">
+                <label>Github-like</label>
+            </form>
+        </header>
+        {% set latest_streak = record.latest_streak %}
+        {% if latest_streak %}
+        <div class="streak-info">
+            {% set longest_streak = record.longest_streak %}
+            <div class="streak">
+                {{ render_streak(longest_streak, 'Longest Streak') }}
+            </div>
+            <div class="streak">
+                {{ render_streak(latest_streak, 'Latest Streak') }}
+            </div>
+        </div>
+        {% endif %}
         <ul class="days">
             <li class="day-name"></li>
             <li class="day-name"><div>M</div></li>
@@ -23,24 +52,5 @@
             </li>
             {%- endfor -%}
         </ul>
-        {% set latest_streak = record.latest_streak %}
-        {% if latest_streak %}
-        <div class="streak-info">
-            {% set longest_streak = record.longest_streak %}
-            <div class="streak">
-                {{ render_streak(longest_streak, 'Longest Streak') }}
-            </div>
-            <div class="streak">
-                {{ render_streak(latest_streak, 'Latest Streak') }}
-            </div>
-        </div>
-        {% endif %}
-        <form action="javascript:void();">
-            <h1>View options:</h1>
-            <input type="radio" name="layout" value="plain">
-            <label>Plain</label>
-            <input type="radio" name="layout" value="weekly" checked>
-            <label>Github-like</label>
-        </form>
     </div>
 {%- endmacro -%}

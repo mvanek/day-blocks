@@ -1,18 +1,17 @@
-header {
-    text-align: center;
-}
 .days {
-    position: relative;
-    padding-top: 2em;
+    margin-left: 1em;
+    padding-bottom: 2em;
     font-size: 1.1em;
+    position: relative;
 }
 .tooltip {
     display: none;
-    position: absolute; top: 0; left: 0; right: 0;
+    position: absolute; bottom: 0; left: 0; right: 0;
     color: #555; font-family: sans-serif; font-size: 2em;
     text-align: center;
     line-height: 1em;
 }
+
 
 /*
  * Flexbox settings
@@ -34,52 +33,45 @@ header {
 .weekly .days {
     height: 7em;
     margin-bottom: -7px;
-    -webkit-box-direction: column; -webkit-align-content: center;
-    -moz-box-direction: column; -moz-align-content: center;
-    -ms-flexbox-direction: column; -ms-align-content: center;
-    -webkit-flex-direction: column; -webkit-align-content: center;
-    flex-direction: column; align-content: center;
+    -webkit-box-direction: column; -webkit-align-content: flex-start;
+    -moz-box-direction: column; -moz-align-content: flex-start;
+    -ms-flexbox-direction: column; -ms-align-content: flex-start;
+    -webkit-flex-direction: column; -webkit-align-content: flex-start;
+    flex-direction: column; align-content: flex-start;
 }
 
 /*
  * Date block user interaction
  */
-.day:hover {
-    background-color: #eee;
-}
-.day.set {
-    background-color: #a0d020;
-}
-.day.set:hover {
-    background-color: #b0e030;
-}
-.day:hover .tooltip {
-    display: block;
-}
+.day:hover { background-color: #eee; }
+.day:hover .tooltip { display: block; }
+.day.set { background-color: #a0d020; }
+.day.set:hover { background-color: #b0e030; }
 
 /*
  * Day of week & placeholder blocks, used in weekly/github-like view
  */
 .day-name,
 .placeholder {
-    text-align: center;
+    text-align: left;
     border-color: rgba(0,0,0,0);
     display: none;  /* Hide blocks unless using weekly view */
 }
-.day-name div {
-    color: #555; font-family: sans-serif; font-size: 0.8em;
-}
+.day-name { width: 1.5em; }
+.day-name div { color: #555; font-family: sans-serif; font-size: 0.8em; }
 .weekly .placeholder,
 .weekly .day-name {
     display: block;
 }
 
 /*
- * View controls
+ * Record header bar
  */
+.record>header { clear: both; margin-bottom: 1em; }
+.record-link { font-size: 1.1em; margin-right: 1em; }
+.record form { font-size: 0.9em; }
 .record form h1 {
-    display: inline;
-    margin-right: 1em;
+    display: inline-block;
 }
 
 /*
@@ -87,14 +79,19 @@ header {
  */
 .streak-info {
     color: #555; font-family: sans-serif;
-    text-align: center;
+    text-align: left;
     letter-spacing: 1em;
-    margin-top: 0.5em;
+    margin: 0 1em;
+    float:left;
 }
 .streak {
-    display: inline-block;
+    display: block;
     font-size: 0.75em;
     letter-spacing: normal;
+    text-align: center;
+}
+.streak+.streak {
+    margin-top: 1em;
 }
 .streak-length {
     font-size: 1.33em;

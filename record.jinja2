@@ -3,8 +3,10 @@
 <!doctype html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ record.name|e }}</title>
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/css/base.css">
     <link rel="stylesheet" type="text/css" href="/css/record.css">
 </head>
 <body>
@@ -12,20 +14,17 @@
     <form name="set_name" method="post">
         <label for="name">name</label>
         <input type="text" name="name" value="{{ record.name|e }}">
-        <input type="hidden" name="method" value="set_name"></input>
-        <input type="submit">
+        <input type="submit" name="method" value="set_name">
     </form>
     <form name="set_startdate" method="post">
         <label for="date">start date</label>
         <input type="text" name="date" value="{{ record.start_date }}">
-        <input type="hidden" name="method" value="set_start"></input>
-        <input type="submit">
+        <input type="submit" name="method" value="set_start">
     </form>
     <form name="set_user" method="post">
         <label for="user">user</label>
         <input type="text" name="user" value="{{ record.user|default('', True)|e }}">
-        <input type="hidden" name="method" value="set_user"></input>
-        <input type="submit">
+        <input type="submit" name="method" value="set_user">
     </form>
     {{ render_record(record) }}
     <script src="/js/record.js"></script>

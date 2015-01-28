@@ -1,0 +1,4 @@
+body { font-family: sans-serif; padding: 1em;}
+body>header,footer { text-align:center; }
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }

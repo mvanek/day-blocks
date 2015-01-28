@@ -67,9 +67,9 @@
             for (j=0; j<layoutButtons.length; j++) {
                 curButton = layoutButtons[j];
                 if (curButton.checked) {
-                    viewForm.parentNode.classList.add(curButton.value);
+                    viewForm.parentNode.parentNode.classList.add(curButton.value);
                 } else {
-                    viewForm.parentNode.classList.remove(curButton.value);
+                    viewForm.parentNode.parentNode.classList.remove(curButton.value);
                 }
             }
         }, false);
