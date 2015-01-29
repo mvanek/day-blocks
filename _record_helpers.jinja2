@@ -1,7 +1,9 @@
 {%- macro render_streak(streak, label) -%}
-    <h2>{{ label }}</h2>
-    <div class="streak-length">{{ streak.length }} days</div>
-    <div class="streak-date">{{ streak.start_date }}</div>
+    <div class="streak">
+        <h2>{{ label }}</h2>
+        <div class="streak-length">{{ streak.length }} days</div>
+        <div class="streak-date">{{ streak.start_date }}</div>
+    </div>
 {%- endmacro -%}
 
 {%- macro render_record(record, show_link=False, show_user=True) -%}
@@ -27,13 +29,8 @@
         {% set latest_streak = record.latest_streak %}
         {% if latest_streak %}
         <div class="streak-info">
-            {% set longest_streak = record.longest_streak %}
-            <div class="streak">
-                {{ render_streak(longest_streak, 'Longest Streak') }}
-            </div>
-            <div class="streak">
-                {{ render_streak(latest_streak, 'Latest Streak') }}
-            </div>
+            {{ render_streak(record.longest_streak, 'Longest Streak') }}
+            {{ render_streak(latest_streak, 'Latest Streak') }}
         </div>
         {% endif %}
         <ul class="days">
