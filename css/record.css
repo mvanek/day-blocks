@@ -1,13 +1,13 @@
 .days {
     margin: 0 1em;
-    padding-bottom: 2em;
+    padding-bottom: 1.5em;
     font-size: 1.1em;
     position: relative;
 }
 .tooltip {
-    display: none;
+    visibility: hidden;
     position: absolute; bottom: 0; left: 0; right: 0;
-    color: #555; font-family: sans-serif; font-size: 2em;
+    color: #555; font-family: sans-serif; font-size: 1.5em;
     text-align: center;
     line-height: 1em;
 }
@@ -39,28 +39,31 @@
     -webkit-flex-direction: column; -webkit-align-content: flex-start;
     flex-direction: column; align-content: flex-start;
 }
+.vertical .days {
+    width: 7em;
+}
 
 /*
  * Date block user interaction
  */
 .day:hover { background-color: #eee; }
-.day:hover .tooltip { display: block; }
+.day:hover .tooltip { visibility: visible; }
 .day.set { background-color: #a0d020; }
 .day.set:hover { background-color: #b0e030; }
 
 /*
- * Day of week & placeholder blocks, used in weekly/github-like view
+ * Day of week & placeholder blocks, used in weekly/github-like views
  */
+.day-name div { color: #555; font-family: sans-serif; font-size: 0.8em; }
 .day-name,
 .placeholder {
-    text-align: left;
     border-color: rgba(0,0,0,0);
     display: none;  /* Hide blocks unless using weekly view */
 }
-.day-name { width: 1.5em; }
-.day-name div { color: #555; font-family: sans-serif; font-size: 0.8em; }
 .weekly .placeholder,
-.weekly .day-name {
+.weekly .day-name,
+.vertical .placeholder,
+.vertical .day-name {
     display: block;
 }
 
@@ -68,11 +71,9 @@
  * Record header bar
  */
 .record>header { clear: both; margin-bottom: 1em; }
-.record-link { font-size: 1.1em; margin-right: 1em; }
+.record-link { font-size: 1.1em; }
 .record form { font-size: 0.9em; }
-.record form h1 {
-    display: inline-block;
-}
+.record form h1 { display: inline-block; }
 
 /*
  * Streaks
@@ -117,3 +118,31 @@
     user-select: none;
     cursor: default;
 }
+
+/*
+ * Horizontal weekly view
+ */
+.weekly .day-name { width: 1.5em; }
+
+/*
+ * Vertical view
+ */
+.vertical { background-color:#f8f8f8; width:14em; padding:0.5em; }
+.vertical .day:hover { background-color:#d8d8d8; }
+.vertical .day.set:hover { background-color: #b0e030; }
+.vertical .record-link { display:block; }
+.vertical .day-name { height: 1.5em; text-align: center; }
+.vertical .days { font-size: 1.25em; margin: auto; }
+.vertical .streak-info { float: none; }
+.vertical .streak { display: inline-block; }
+#record_list {
+    /*
+    -webkit-column-count:3; -moz-column-count:3; column-count:3;
+    */
+    -webkit-column-width:14em; -moz-column-width:14em; column-width:14em;
+    -webkit-column-gap:1em; -moz-column-gap:1em; column-gap:1em;
+    margin-top:1em;
+    text-align:center;
+}
+.record { text-align:left; }
+.weekly,.plain {}

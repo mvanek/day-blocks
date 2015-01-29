@@ -5,7 +5,7 @@
 {%- endmacro -%}
 
 {%- macro render_record(record, show_link=False, show_user=True) -%}
-    <div id="record-{{ record.key.id() }}" class="record">
+    <div class="record" id="record-{{ record.key.id() }}">
         <header>
             {% if show_link %}
             <div class="record-link">
@@ -14,14 +14,15 @@
                 (<a href="/u/{{ record.user|e }}">{{ record.user|e }}</a>)
                 {% endif %}
             </div>
-            {% endif %}
+            {% else %}
             <form action="javascript:void();">
-                <h1>View options:</h1>
-                <input type="radio" name="layout" value="plain" checked>
-                <label>Plain</label>
+                <h1>View options</h1>
+                <input type="radio" name="layout" value="plain">
+                <label>Plain</label><br>
                 <input type="radio" name="layout" value="weekly">
                 <label>Github-like</label>
             </form>
+            {% endif %}
         </header>
         {% set latest_streak = record.latest_streak %}
         {% if latest_streak %}

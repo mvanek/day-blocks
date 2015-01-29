@@ -16,10 +16,10 @@ form[name="new_record"] {
 form[name="new_record"] h1 { position: absolute; top: 0.5em; left: 0.5em; font-size: 1em; }
 form[name="new_record"] label { font-size: 0.9em; }
 .hidden { display: none; }
-
-/* List settings */
-#record_list>h1 { text-align: center; font-size: 1.25em; }
+body>h1 { text-align: center; font-size: 1.25em; }
 
 /* List item settings */
-#record_list>li { padding:1em 0; }
-#record_list>li+li { border-top:solid 1px #ccc; }
+#record_list>li { display:inline-block; vertical-align:top; margin-bottom:1em; }
+/*
+#record_list>li+li { border-bottom:solid 1px #ccc; }
+*/

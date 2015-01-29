@@ -24,10 +24,10 @@
         <button type="button">Cancel</button>
         <input type="submit">
     </form>
+    <h1>{{ user|e|default('everybody', True) }}'s records</h1>
     <ul id="record_list">
-        <h1>{{ user|e|default('everybody', True) }}'s records</h1>
         {%- for rec in records %}
-        <li>
+        <li class="vertical">
             {{ render_record(rec, show_link=True, show_user=(not user)) }}
         </li>
         {%- endfor %}
