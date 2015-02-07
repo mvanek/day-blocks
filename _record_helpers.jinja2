@@ -41,7 +41,7 @@
             <li class="day-name"></li>
             <li class="day-name"><div>F</div></li>
             <li class="day-name"></li>
-            {%- if start_date -%}
+            {%- if start_date and record.start_date <= start_date -%}
                 {%- for i in range((start_date.isoweekday()) % 7) -%}
                 <li class="placeholder"></li>
                 {%- endfor -%}
