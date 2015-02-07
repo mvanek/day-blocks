@@ -11,6 +11,7 @@
 </head>
 <body>
     <header><a href="/r/">home</a> | <a href="/u/">user list</a></header>
+    <h1>{{ user|e|default('everybody', True) }}'s records</h1>
     <button id="show-form">+ New</button>
     <form class="hidden" name="new_record" action="/r/" method="post">
         <h1>Create new</h1>
@@ -24,7 +25,6 @@
         <button type="button">Cancel</button>
         <input type="submit">
     </form>
-    <h1>{{ user|e|default('everybody', True) }}'s records</h1>
     <ul id="record_list">
         {%- for rec in records %}
         <li class="vertical">
