@@ -6,7 +6,7 @@
     </div>
 {%- endmacro -%}
 
-{%- macro render_record(record, show_link=False, show_user=True) -%}
+{%- macro render_record(record, show_link=False, show_user=True, start_date=None) -%}
     <div class="record" id="record-{{ record.key.id() }}">
         <header>
             {% if show_link %}
@@ -41,14 +41,25 @@
             <li class="day-name"></li>
             <li class="day-name"><div>F</div></li>
             <li class="day-name"></li>
-            {%- for i in range((record.start_date.isoweekday()) % 7) -%}
-            <li class="placeholder"></li>
-            {%- endfor -%}
-            {%- for d in record.calendar -%}
-            <li class="day{% if d.set %} set{% endif %}">
-                <div class="tooltip">{{ d.date|e }}</div>
-            </li>
-            {%- endfor -%}
+            {%- if start_date -%}
+                {%- for i in range((start_date.isoweekday()) % 7) -%}
+                <li class="placeholder"></li>
+                {%- endfor -%}
+                {%- for d in record.calendar if d.date >= start_date -%}
+                <li class="day{% if d.set %} set{% endif %}">
+                    <div class="tooltip">{{ d.date }}</div>
+                </li>
+                {%- endfor -%}
+            {%- else %}
+                {%- for i in range((record.start_date.isoweekday()) % 7) -%}
+                <li class="placeholder"></li>
+                {%- endfor -%}
+                {%- for d in record.calendar -%}
+                <li class="day{% if d.set %} set{% endif %}">
+                    <div class="tooltip">{{ d.date }}</div>
+                </li>
+                {%- endfor -%}
+            {%- endif -%}
         </ul>
     </div>
 {%- endmacro -%}

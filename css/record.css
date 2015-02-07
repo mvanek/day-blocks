@@ -126,20 +126,21 @@
 
 /*
  * Vertical view
- */
 .vertical { background-color:#f8f8f8; width:14em; padding:0.5em; }
+ */
+.vertical header { text-align: center; }
 .vertical .day:hover { background-color:#d8d8d8; }
 .vertical .day.set:hover { background-color: #b0e030; }
 .vertical .record-link { display:block; }
 .vertical .day-name { height: 1.5em; text-align: center; }
 .vertical .days { font-size: 1.25em; margin: auto; }
-.vertical .streak-info { float: none; margin-bottom: 1em; }
+.vertical .streak-info { float: none; margin: 0 0 1em 0; }
 .vertical .streak { display: inline-block; margin: 0; }
 #record_list {
     /*
     -webkit-column-count:3; -moz-column-count:3; column-count:3;
     */
-    -webkit-column-width:14em; -moz-column-width:14em; column-width:14em;
+    -webkit-column-width:11em; -moz-column-width:11em; column-width:11em;
     -webkit-column-gap:1em; -moz-column-gap:1em; column-gap:1em;
     margin-top:1em;
     text-align:center;

@@ -28,9 +28,11 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
+JINJA_ENVIRONMENT.globals['datetime'] = datetime
 
 Streak = namedtuple('Streak', ['length', 'start_date'])
 Day = namedtuple('Day', ['set', 'date'])
+
 
 class Record(ndb.Model):
     start_date = ndb.DateProperty()
@@ -156,7 +158,10 @@ class RecordListHandler(webapp2.RequestHandler):
     def get(self):
         template = JINJA_ENVIRONMENT.get_template('index.jinja2')
         records = Record.query()
-        self.response.write(template.render(records=records))
+        self.response.write(template.render(
+            records=records,
+            start_date=datetime.datetime.now().date()-datetime.timedelta(104)
+        ))
 
     def post(self):
         start_date = datetime.date(*map(int, self.request.get('start_date').split('-')))

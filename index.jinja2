@@ -28,7 +28,7 @@
     <ul id="record_list">
         {%- for rec in records %}
         <li class="vertical">
-            {{ render_record(rec, show_link=True, show_user=(not user)) }}
+            {{ render_record(rec, show_link=True, show_user=(not user), start_date=start_date) }}
         </li>
         {%- endfor %}
     </ul>
