@@ -178,7 +178,11 @@ class UserHandler(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('index.jinja2')
         user = unquote(self.request.path.split('/')[2])
         records = Record.query(Record.user == user)
-        self.response.write(template.render(records=records, user=user))
+        self.response.write(template.render(
+            records=records,
+            start_date=datetime.datetime.now().date()-datetime.timedelta(104),
+            user=user
+        ))
 
 class UserListHandler(webapp2.RequestHandler):
     def get(self):
