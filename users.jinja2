@@ -1,12 +1,12 @@
 <!doctype html>
 <html>
 <head>
-    <title>records</title>
+    <title>user list</title>
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/base.css">
 </head>
 <body>
-    <header><a href="/r/">home</a> | <a href="/u/">user list</a></header>
+    <header><a href="/r/">home</a> | <a href="/u/">user list</a> | <a href="/help">help</a></header>
     <ul class="user-list">
         {% for u in users if u %}
         <li><a href="/u/{{ u }}">{{ u }}</a></li>

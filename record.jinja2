@@ -1,5 +1,4 @@
 {% from '_record_helpers.jinja2' import render_record %}
-
 <!doctype html>
 <html>
 <head>
@@ -10,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/css/record.css">
 </head>
 <body>
-    <header><a href="/r/">home</a> | <a href="/u/">user list</a></header>
+    <header><a href="/r/">home</a> | <a href="/u/">user list</a> | <a href="/help">help</a></header>
     <form name="set_name" method="post">
         <label for="name">name</label>
         <input type="text" name="name" value="{{ record.name|e }}">
