@@ -10,17 +10,23 @@
     <link rel="stylesheet" type="text/css" href="/css/record.css">
     <style>
     body { padding-left: 0; padding-right: 0; }
-    section h2 { font-size: 1.1em; }
 
     figure { display: flex; justify-content: center; align-items: center; }
     figure figcaption { flex-grow: 1; }
+    figure img { flex-shrink: 0; }
 
     article.alfa { background-color: #aab; color: #eee; }
     article.alfa figure img { box-shadow: 0 0 0.125em 2em #fff; }
     article.beta { background-color: #fff; color: #333; }
 
-    figure img { margin: 6em; }
-    figure figcaption { font-size: 2em; }
+    article { padding: 3em; }
+    figure img { margin: 3em; }
+    figure figcaption { margin: 1.5em; font-size: 2em; }
+
+    @media screen and (max-width: 47em) {
+      figure { flex-wrap: wrap; }
+      figure figcaption { text-align: center; }
+    }
     </style>
 </head>
 <body>
